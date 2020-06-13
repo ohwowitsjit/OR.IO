@@ -1,72 +1,21 @@
 //Import libraries and dependencies
 import React, { Component } from "react";
-import { View, Text, StyleSheet, PermissionsAndroid } from "react-native";
-import { Buffer } from "buffer";
+//import { createStackNavigator } from "@react-navigation/stack";
+//import { NavigationContainer } from '@react-navigation/native';
 
-//Import functions from util files
-import { requestRecordPermission } from "./utils/Permissions";
-import { postRequest } from "./utils/Connection";
+//Import pages
+import LoginPage from './pages/LoginPage';
+import HomePage from './pages/HomePage';
 
-//App Component
-class App extends Component {
+//const Stack = createStackNavigator();
 
-  async componentDidMount() {
+//function App() {
+// return (
+//    <Stack.Navigator>
+//      <Stack.Screen name="Home" component="HomePage" />
+//      <Stack.Screen name="Login" component="LoginPage" />
+//    </Stack.Navigator>
+//  );
+//};
 
-    //Get permission to use microphone
-    requestRecordPermission();
-
-
-
-    console.log('Pass');
-
-  };
-
-  //Render app components
-  render() {
-    return (
-      <View style={styles.background} >
-        <View>
-          <Text style={styles.logo}>OR.IO</Text>
-        </View>
-        <View style={styles.recArea}>
-          <Text style={styles.centerText}>RECORDING...</Text>
-        </View>
-      </View>
-    );
-  };
-
-};
-
-//Styling of components
-const styles = StyleSheet.create({
-  //Styling for the background View component
-  background: {
-    flex: 1,
-    backgroundColor: "#FDFFFC",
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingTop: 20,
-  },
-  //Logo View style
-  logo: {
-    marginLeft: 0,
-    color: "#C52831",
-    fontSize: 80,
-    padding: 0,
-  },
-  //Styling for recording text's wrapper
-  recArea: {
-    backgroundColor: "#F1D302",
-    minHeight: 40,
-    minWidth: 130,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 100 / 2,
-  },
-  centerText: {
-
-  },
-});
-
-//Export App
-export default App;
+export default HomePage;
