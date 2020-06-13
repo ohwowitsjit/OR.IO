@@ -1,9 +1,13 @@
 //Import all libraries and dependencies
 import React, { Component } from "react";
 import { View, Text, StyleSheet, PermissionsAndroid } from "react-native";
-import AudioRecord from "react-native-audio-record";
+import { AudioRecord } from "react-native-audio-record";
+import { axios } from "axios";
+import { Buffer } from "buffer";
 
-
+//Cos Permission alr set in settings, no need to ask for permission
+//Permission being in settings means it'll always returned permission granted,even when cancel pressed
+//This functionailty just remains here, in case there is a need to ask
 const requestRecordPermission = async () => {
   try {
     const granted = await PermissionsAndroid.request(
@@ -45,9 +49,12 @@ class App extends Component {
     //Init AudioRecord
     AudioRecord.init(options);
 
-    AudioRecord.start();
+    AudioRecord.on('data', data => {
+      const chunk = Buffer.from(data, 'base64');
+      console.log('chunk size', chunk.byteLength);
+    });
 
-    audioFile = await AudioRecord.stop();
+    console.log('Pass');
 
   };
 
