@@ -1,30 +1,11 @@
 //Import libraries and dependencies
 import React, { Component } from "react";
 import { View, Text, StyleSheet, PermissionsAndroid } from "react-native";
-import { AudioRecord } from "react-native-audio-record";
-import { axios } from "axios";
 import { Buffer } from "buffer";
 
 //Import functions from util files
 import { requestRecordPermission } from "./utils/Permissions";
-
-//Get connection info fromconfig.json
-connConfig = require('./utils/config.json')
-
-//Define Obj to handle 
-var connObj = axios.create();
-connObj.defaults.headers['Authorization'] = connConfig.clientKey
-
-
-//Function to send POST requests
-async postRequest(data){
-  return await axios.post('https://' + connConfig.url, {
-    "clientKey": connConfig.clientKey,
-    "data": data
-  })
-};
-
-
+import { postRequest } from "./utils/Connection";
 
 //App Component
 class App extends Component {
@@ -34,29 +15,11 @@ class App extends Component {
     //Get permission to use microphone
     requestRecordPermission();
 
-    //Define options object for AudioRecord
-    const options = {
-      sampleRate: 16000,
-      channels: 1,
-      bitsPerSample: 16,
-      wavFile: 'audio.wav'
-    };
 
-    //Init AudioRecord
-    AudioRecord.init(options);
-
-    //Audio stream supposedly?
-    AudioRecord.on('data', data => {
-      const chunk = Buffer.from(data, 'base64');
-      console.log('chunk size', chunk.byteLength);
-    });
 
     console.log('Pass');
 
   };
-
-
-
 
   //Render app components
   render() {
@@ -90,7 +53,6 @@ const styles = StyleSheet.create({
     color: "#C52831",
     fontSize: 80,
     padding: 0,
-    fontFamily: Fonts.Muli,
   },
   //Styling for recording text's wrapper
   recArea: {

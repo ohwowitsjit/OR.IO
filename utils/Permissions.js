@@ -1,3 +1,4 @@
+//Import libraries
 import React from "react";
 import { PermissionsAndroid } from "react-native";
 
@@ -5,26 +6,30 @@ import { PermissionsAndroid } from "react-native";
 //Permission being in settings means it'll always returned permission granted,even when cancel pressed
 //This functionailty just remains here, in case there is a need to ask
 
+//Function to create a popup alert to request permissions
+export function requestRecordPermission() {
+    async () => {
+        try {
+            const granted = await PermissionsAndroid.request(
+                PermissionsAndroid.PERMISSIONS.RECORD_AUDIO,
+                {
+                    title: "OR.IO Permissions",
+                    message:
+                        "We need to use your microphone " +
+                        "to do what we do.",
+                    buttonNegative: "Cancel",
+                    buttonPositive: "OK"
+                }
+            );
 
-export function requestRecordPermission = async () => {
-    try {
-        const granted = await PermissionsAndroid.request(
-            PermissionsAndroid.PERMISSIONS.RECORD_AUDIO,
-            {
-                title: "OR.IO Permissions",
-                message:
-                    "We need to use your microphone " +
-                    "to do what we do.",
-                buttonNegative: "Cancel",
-                buttonPositive: "OK"
+            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                console.log("RECORD AUDIO ENABLED");
+            } else {
+                console.log("DENIED");
             }
-        );
-        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-            console.log("RECORD AUDIO ENABLED");
-        } else {
-            console.log("DENIED");
+
+        } catch (err) {
+            console.warn(err);
         }
-    } catch (err) {
-        console.warn(err);
     }
 };
