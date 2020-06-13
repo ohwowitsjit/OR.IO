@@ -1,37 +1,30 @@
-//Import all libraries and dependencies
+//Import libraries and dependencies
 import React, { Component } from "react";
 import { View, Text, StyleSheet, PermissionsAndroid } from "react-native";
 import { AudioRecord } from "react-native-audio-record";
 import { axios } from "axios";
 import { Buffer } from "buffer";
 
-import { Fonts } from './utils/Fonts';
+//Import functions from util files
+import { requestRecordPermission } from "./utils/Permissions";
 
-//Cos Permission alr set in settings, no need to ask for permission
-//Permission being in settings means it'll always returned permission granted,even when cancel pressed
-//This functionailty just remains here, in case there is a need to ask
-const requestRecordPermission = async () => {
-  try {
-    const granted = await PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.RECORD_AUDIO,
-      {
-        title: "OR.IO Permissions",
-        message:
-          "We need to use your microphone " +
-          "to do what we do.",
-        buttonNegative: "Cancel",
-        buttonPositive: "OK"
-      }
-    );
-    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      console.log("RECORD AUDIO ENABLED");
-    } else {
-      console.log("DENIED");
-    }
-  } catch (err) {
-    console.warn(err);
-  }
+//Get connection info fromconfig.json
+connConfig = require('./utils/config.json')
+
+//Define Obj to handle 
+var connObj = axios.create();
+connObj.defaults.headers['Authorization'] = connConfig.clientKey
+
+
+//Function to send POST requests
+async postRequest(data){
+  return await axios.post('https://' + connConfig.url, {
+    "clientKey": connConfig.clientKey,
+    "data": data
+  })
 };
+
+
 
 //App Component
 class App extends Component {
