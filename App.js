@@ -1,36 +1,67 @@
-import * as React from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+//Import all libraries and dependencies
+import React, { Component } from "react";
+import { View, Text, StyleSheet, Button } from "react-native";
+//import AudioRecord from "react-native-audio-record";
+//import { check, PERMISSIONS, RESULTS } from 'react-native-permissions';
 
-const instructions = Platform.select({
-  ios: `Press Cmd+R to reload,\nCmd+D or shake for dev menu`,
-  android: `Double tap R on your keyboard to reload,\nShake or press menu button for dev menu`,
-});
+//App Component
+const App = () => {
 
-export default function App() {
+  //Define options object for AudioRecord
+  const options = {
+    sampleRate: 16000,
+    channels: 1,
+    bitsPerSample: 16,
+    wavFile: 'audio.wav'
+  };
+  //Init AudioRecord
+  //AudioRecord.init(options)
+
+
+
+
+  //Render app components
   return (
-    <View style={styles.container}>
-      <Text style={styles.welcome}>Welcome to React Native!</Text>
-      <Text style={styles.instructions}>To get started, edit App.js</Text>
-      <Text style={styles.instructions}>{instructions}</Text>
+    <View style={styles.background} >
+      <View>
+        <Text style={styles.logo}>OR.IO</Text>
+      </View>
+      <View style={styles.recArea}>
+        <Text style={styles.centerText}>RECORDING...</Text>
+      </View>
     </View>
   );
-}
+};
 
+//Styling of components
 const styles = StyleSheet.create({
-  container: {
+  //Styling for the background View component
+  background: {
     flex: 1,
+    backgroundColor: "#FDFFFC",
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    paddingTop: 20,
+  }, and
+  //Logo View style
+  logo: {
+    marginLeft: 0,
+    color: "#C52831",
+    fontSize: 80,
+    padding: 0,
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  recArea: {
+    backgroundColor: "#F1D302",
+    minHeight: 40,
+    minWidth: 130,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 100 / 2,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  centerText: {
+
   },
 });
+
+//Export App
+export default App;
