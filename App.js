@@ -5,6 +5,8 @@ import { AudioRecord } from "react-native-audio-record";
 import { axios } from "axios";
 import { Buffer } from "buffer";
 
+import { Fonts } from './utils/Fonts';
+
 //Cos Permission alr set in settings, no need to ask for permission
 //Permission being in settings means it'll always returned permission granted,even when cancel pressed
 //This functionailty just remains here, in case there is a need to ask
@@ -35,6 +37,7 @@ const requestRecordPermission = async () => {
 class App extends Component {
 
   async componentDidMount() {
+
     //Get permission to use microphone
     requestRecordPermission();
 
@@ -49,6 +52,7 @@ class App extends Component {
     //Init AudioRecord
     AudioRecord.init(options);
 
+    //Audio stream supposedly?
     AudioRecord.on('data', data => {
       const chunk = Buffer.from(data, 'base64');
       console.log('chunk size', chunk.byteLength);
@@ -93,6 +97,7 @@ const styles = StyleSheet.create({
     color: "#C52831",
     fontSize: 80,
     padding: 0,
+    fontFamily: Fonts.Muli,
   },
   //Styling for recording text's wrapper
   recArea: {
