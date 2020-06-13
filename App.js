@@ -12,7 +12,7 @@ const requestRecordPermission = async () => {
         title: "OR.IO Permissions",
         message:
           "We need to use your microphone " +
-          "todo what we do.",
+          "to do what we do.",
         buttonNegative: "Cancel",
         buttonPositive: "OK"
       }
