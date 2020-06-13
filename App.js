@@ -1,8 +1,8 @@
 //Import all libraries and dependencies
 import React, { Component } from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
-//import AudioRecord from "react-native-audio-record";
-//import { check, PERMISSIONS, RESULTS } from 'react-native-permissions';
+import AudioRecord from "react-native-audio-record";
+import { check, PERMISSIONS, RESULTS } from 'react-native-permissions';
 
 //App Component
 const App = () => {
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingTop: 20,
-  }, and
+  },
   //Logo View style
   logo: {
     marginLeft: 0,

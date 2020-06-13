@@ -35,7 +35,7 @@ target 'orio' do
   pod 'DoubleConversion', :podspec => "#{rnPrefix}/third-party-podspecs/DoubleConversion.podspec"
   pod 'glog', :podspec => "#{rnPrefix}/third-party-podspecs/glog.podspec"
   pod 'Folly', :podspec => "#{rnPrefix}/third-party-podspecs/Folly.podspec"
-
+  pod 'Permission-Microphone', :path => "#{permissions_path}/Microphone.podspec"
   # Other native modules
 
   # Automatically detect installed unimodules
