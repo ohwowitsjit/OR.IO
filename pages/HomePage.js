@@ -1,11 +1,12 @@
 //Import libraries and dependencies
 import React, { Component } from "react";
 import { View, Text, StyleSheet, PermissionsAndroid } from "react-native";
-import { AudioRecord } from "react-native-audio-record";
 
 //Import functions from util files
 import { requestRecordPermission } from "../utils/Permissions";
 import { postRequestCFR, postRequestModel } from "../utils/Connection";
+import { startRecording, setUpRecorder } from "../utils/Audio";
+import { getLocation } from "../utils/Geolocation";
 
 //App Component
 class HomePage extends Component {
@@ -15,14 +16,23 @@ class HomePage extends Component {
         //Get permission to use microphone
         requestRecordPermission();
 
+        //Initialise recorder
+        setUpRecorder();
+
+        //Start recorder
+        while (true) {
+            startRecording();
+        }
+
         //Init FormData to contain the data sent over POST
         const dataObj = new FormData();
         dataObj.append("data", {
-            uri: '../icon.png',
-            type: 'image/png',
-            name: 'icon.png'
+            uri: '../audio.wav',
+            type: 'audio',
+            name: 'audio.wav'
         });
         dataObj.append({ 'test': 'testyboi' });
+
 
         data = {
             method: 'post',
@@ -38,7 +48,10 @@ class HomePage extends Component {
         const modelResult = postRequestModel(data);
 
         //Check if fall detected
-        if (modelResult.fallProbability) { }
+        if (modelResult.fallProbability) {
+            data = {};
+            const cfrActivation = postRequestCFR(data);
+        };
     };
 
 

@@ -1,8 +1,7 @@
 //Defining parameters
-modelApiUrl = 'http://34.87.53.98:5000/predict'
-cfrApiUrl = '';
-
-
+//http://34.87.53.98:5000/predict
+modelApiUrl = 'https://orio.mybluemix.net/predict'
+cfrApiUrl = 'https://orio.mybluemix.net/cfr';
 
 //Generic function for post requests
 async function postRequest(url, data) {

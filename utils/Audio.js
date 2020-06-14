@@ -1,22 +1,22 @@
 import React from "react";
-import { AudioRecord } from "react-native-audio-record";
+import AudioRecord from "react-native-audio-record";
 
 //Define options object for AudioRecord
 const options = {
     sampleRate: 16000,
     channels: 1,
     bitsPerSample: 16,
-    wavFile: 'audio.wav'
+    wavFile: './audio.wav'
 };
 
-//Init AudioRecord
-AudioRecord.init(options);
+//Function to initialise audio recorder
+export function setUpRecorder() {
+    //Init AudioRecord
+    return AudioRecord.init(options);
+}
 
-//Audio stream supposedly?
-//AudioRecord.on('data', data => {
-// const chunk = Buffer.from(data, 'base64');
-//  console.log('chunk size', chunk.byteLength);
-//  res = postRequest(chunk);
-//});
+export async function startRecording() {
+    AudioRecord.start();
 
-AudioRecord.start();
+    return await setTimeout(AudioRecord.stop(), 1500)
+};
