@@ -4,7 +4,6 @@ import React, { Component } from "react";
 //import { NavigationContainer } from '@react-navigation/native';
 
 //Import pages
-import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
 
 //const Stack = createStackNavigator();

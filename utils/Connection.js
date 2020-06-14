@@ -1,25 +1,31 @@
-//Import libraries
-import React from "react";
-import axios from "axios";
+//Defining parameters
+modelApiUrl = 'http://34.87.53.98:5000/predict'
+cfrApiUrl = '';
 
-//Function to initialise a connection on axios
-function getConnection() {
-    connConfig = require('./config.json')
-    conn = axios.create();
-    console.log(connConfig);
-    conn.defaults.headers['Authorization'] = connConfig.clientKey;
-    conn.defaults.baseURL = "https://" + connConfig.url;
+
+
+//Generic function for post requests
+async function postRequest(url, data) {
+    try {
+        const apiVal = await fetch(url, data)
+            .then(response => {
+                return response.json();
+            }).then(responseData => {
+                return responseData;
+            })
+
+        console.log(apiVal);
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+//Function to send data as a post request to the myResponder interface
+export function postRequestCFR(data) {
+    return postRequest(cfrApiUrl, data);
 };
 
-//Function to makea a post request
-export function postRequest(data) {
-    () => {
-        result = axios.post({
-            url: "https:/'www.google.com",
-            data: "audioFile"
-        });
-        console.log('REQ');
-        console.log(result);
-        return result;
-    };
+//Function to send data as a post request to the model
+export function postRequestModel(data) {
+    return postRequest(modelApiUrl, data);
 };

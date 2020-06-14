@@ -1,11 +1,11 @@
 //Import libraries and dependencies
 import React, { Component } from "react";
 import { View, Text, StyleSheet, PermissionsAndroid } from "react-native";
-import axios from "axios";
+import { AudioRecord } from "react-native-audio-record";
 
 //Import functions from util files
 import { requestRecordPermission } from "../utils/Permissions";
-import { postRequest } from "../utils/Connection";
+import { postRequestCFR, postRequestModel } from "../utils/Connection";
 
 //App Component
 class HomePage extends Component {
@@ -15,53 +15,30 @@ class HomePage extends Component {
         //Get permission to use microphone
         requestRecordPermission();
 
-        try {
-            const apiVal = await fetch('http://34.87.53.98:5000/get')
-                .then(response => {
-                    return response.json();
-                }).then(responseData => {
-                    return responseData;
-                })
+        //Init FormData to contain the data sent over POST
+        const dataObj = new FormData();
+        dataObj.append("data", {
+            uri: '../icon.png',
+            type: 'image/png',
+            name: 'icon.png'
+        });
+        dataObj.append({ 'test': 'testyboi' });
 
-            console.log(apiVal);
-        } catch (e) {
-            console.log(e);
+        data = {
+            method: 'post',
+            mode: 'no-cors',
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
+            body: dataObj
+
         }
 
+        //Send post request to model with data object
+        const modelResult = postRequestModel(data);
 
-
-
-
-
-
-
-        // //POST request to cloud
-        // const apival = await fetch('http://34.87.53.98:5000/predict', {
-        //     method: 'POST',
-        //     headers: {
-        //         //'Accept': 'application/json',
-        //         //'Content=Type': 'application/json'
-        //     },
-        //     body: {}
-        // }).then(
-        //     response => {
-        //         console.log('response')
-        //         if (response.ok) {
-        //             console.log('response ok');
-        //             return response.json();
-        //         } else {
-        //             console.log(response.status);
-        //         }
-        //     }).then(
-        //         jsonResponse => {
-        //             console.log('jsonresponse');
-        //             return jsonResponse;
-        //         }
-        //     ).catch((error) => { console.log(error) });
-
-        // console.log('BAMMMMMMM');
-        // console.log(apival);
-
+        //Check if fall detected
+        if (modelResult.fallProbability) { }
     };
 
 
