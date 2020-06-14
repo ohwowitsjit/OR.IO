@@ -18,4 +18,4 @@ import HomePage from './pages/HomePage';
 //  );
 //};
 
-export default LoginPage;
+export default HomePage;

@@ -1,6 +1,7 @@
 //Import libraries and dependencies
 import React, { Component } from "react";
 import { View, Text, StyleSheet, PermissionsAndroid } from "react-native";
+import axios from "axios";
 
 //Import functions from util files
 import { requestRecordPermission } from "../utils/Permissions";
@@ -14,7 +15,45 @@ class HomePage extends Component {
         //Get permission to use microphone
         requestRecordPermission();
 
+
+
+
+
+
+
+        console.log('before req');
+
+        const apival = await fetch('https://jsonplaceholder.typicode.com/todos/1', {}).then(
+            response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    console.log("Error");
+                }
+            }).then(
+                jsonResponse => {
+                    return jsonResponse;
+                }
+            );
+
+        console.log(apival);
+        console.log('end req');
+
+
     };
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     //Render app components
     render() {
