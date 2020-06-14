@@ -15,44 +15,54 @@ class HomePage extends Component {
         //Get permission to use microphone
         requestRecordPermission();
 
-
-
-
-
-
-
-        console.log('before req');
-
-        const apival = await fetch('https://jsonplaceholder.typicode.com/todos/1', {}).then(
-            response => {
-                if (response.ok) {
+        try {
+            const apiVal = await fetch('http://34.87.53.98:5000/get')
+                .then(response => {
                     return response.json();
-                } else {
-                    console.log("Error");
-                }
-            }).then(
-                jsonResponse => {
-                    return jsonResponse;
-                }
-            );
+                }).then(responseData => {
+                    return responseData;
+                })
 
-        console.log(apival);
-        console.log('end req');
+            console.log(apiVal);
+        } catch (e) {
+            console.log(e);
+        }
 
+
+
+
+
+
+
+
+        // //POST request to cloud
+        // const apival = await fetch('http://34.87.53.98:5000/predict', {
+        //     method: 'POST',
+        //     headers: {
+        //         //'Accept': 'application/json',
+        //         //'Content=Type': 'application/json'
+        //     },
+        //     body: {}
+        // }).then(
+        //     response => {
+        //         console.log('response')
+        //         if (response.ok) {
+        //             console.log('response ok');
+        //             return response.json();
+        //         } else {
+        //             console.log(response.status);
+        //         }
+        //     }).then(
+        //         jsonResponse => {
+        //             console.log('jsonresponse');
+        //             return jsonResponse;
+        //         }
+        //     ).catch((error) => { console.log(error) });
+
+        // console.log('BAMMMMMMM');
+        // console.log(apival);
 
     };
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     //Render app components
